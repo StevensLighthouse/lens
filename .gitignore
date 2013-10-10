@@ -1,2 +1,3 @@
-platforms/[^savedir]
+platforms/ios/
+platforms/android/
 .DS_Store
