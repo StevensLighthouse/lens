@@ -26,18 +26,18 @@
             var map;
 
             function initialize() {
-                console.log("Inside initialize");
+                navigator.geolocation.getCurrentPosition(function(data) {
+                    var latitude = data.coords.latitude;
+                    var longitude = data.coords.longitude;
 
-                var mapOptions = {
-                    zoom: 8,
-                    center: new google.maps.LatLng(-34.397, 150.644),
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
+                    var mapOptions = {
+                        zoom: 8,
+                        center: new google.maps.LatLng(latitude, longitude),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
 
-                console.log("defined mapOptions");
-
-                map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-                console.log("set map");
+                    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                });
             }
         </script>
         <script type="text/javascript">
