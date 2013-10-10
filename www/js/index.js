@@ -21,10 +21,10 @@ var app = {
     receivedEvent: function(id) {
         if (navigator.geolocation)
         {
-            navigator.geolocation.getCurrentPosition(function(data) { 
+            navigator.geolocation.getCurrentPosition(function(data) {
                 var latitude = data.coords.latitude;
                 var longitude = data.coords.longitude;
-//                alert("Lat:" + latitude + " | Lng: " + longitude); 
+                console.log("Lat:" + latitude + " | Lng: " + longitude);
             });
         }
         else{

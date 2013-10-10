@@ -15,8 +15,14 @@
             }
           #map-canvas { background: pink; }
         </style>
+    </head>
+    <body>
+        <div id="map-canvas"></div>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
         <script>
-            navigator.app.loadUrl("http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true", { openExternal:true }); 
             var map;
 
             function initialize() {
@@ -27,18 +33,13 @@
                     center: new google.maps.LatLng(-34.397, 150.644),
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-                
+
                 console.log("defined mapOptions");
-                
+
                 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
                 console.log("set map");
             }
         </script>
-    </head>
-    <body>
-        <div id="map-canvas"></div>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
             initialize();
