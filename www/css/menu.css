@@ -28,3 +28,12 @@
   padding: 20px;
   border-bottom: 1px solid #ccc;
 }
+
+.title {
+  font-weight: bold;
+}
+
+.info {
+  color: #444;
+  font-style: italic;
+}
