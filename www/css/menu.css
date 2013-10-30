@@ -1,0 +1,30 @@
+.menu {
+  position: absolute;
+  background-color: #f6f6f6;
+
+  border: 1px solid #ccc;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+
+  overflow-y: scroll;
+}
+
+.modal {
+  top: 20px;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+
+  border-radius: 10px;
+}
+
+.bottom {
+  top: 60%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.menu-listing {
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
