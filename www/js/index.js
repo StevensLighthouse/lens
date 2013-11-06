@@ -18,17 +18,5 @@ var app = {
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        if (navigator.geolocation)
-        {
-            navigator.geolocation.getCurrentPosition(function(data) {
-                var latitude = data.coords.latitude;
-                var longitude = data.coords.longitude;
-                console.log("Lat:" + latitude + " | Lng: " + longitude);
-            });
-        }
-        else{
-            alert("GeoLocation is not available.");
-        }
-    }
+    receivedEvent: function(id) {}
 };
