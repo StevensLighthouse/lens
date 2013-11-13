@@ -40,12 +40,16 @@ function getTour(id, callback) {
   return request.send();
 }
 
-function buildTourMenu(tours) {
-  var listingElement = document.querySelector('script[name="tour-menu-listing"]');
-  var menuElement = document.querySelector('script[name="tour-menu"]');
-
-  var listingTemplate = Handlebars.compile(listingElement.innerHTML);
+function buildMenu(items) {
+  var menuElement = document.querySelector('script[name="listing-menu"]');
   var menuTemplate = Handlebars.compile(menuElement.innerHTML);
+
+  document.querySelector('#overlay').innerHTML = menuTemplate({ items: items });
+}
+
+function buildTourMenu(tours) {
+  var listingElement = document.querySelector('script[name="tour-listing"]');
+  var listingTemplate = Handlebars.compile(listingElement.innerHTML);
 
   var items = [], i;
 
@@ -53,7 +57,20 @@ function buildTourMenu(tours) {
     items.push(listingTemplate(tours[i]));
   }
 
-  document.querySelector('#overlay').innerHTML = menuTemplate({ items: items });
+  return buildMenu(items);
+}
+
+function buildStopMenu(stops) {
+  var listingElement = document.querySelector('script[name="stop-listing"]');
+  var listingTemplate = Handlebars.compile(listingElement.innerHTML);
+
+  var items = [], i;
+
+  for (i = 0; i < stops.length; i++) {
+    items.push(listingTemplate(stops[i]));
+  }
+
+  return buildMenu(items);
 }
 
 $(function () {
@@ -90,6 +107,7 @@ $(function () {
       }
 
       map.fitBounds(bounds);
+      buildStopMenu(stops);
     });
   });
 

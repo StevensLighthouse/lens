@@ -16,7 +16,7 @@
         <!-- overlay! -->
         <div id="overlay"></div>
 
-        <script type="text/x-handlebars" name="tour-menu">
+        <script type="text/x-handlebars" name="listing-menu">
             <div class="menu bottom">
                 {{#each items}}
                     {{{this}}}
@@ -24,8 +24,15 @@
             </div>
         </script>
 
-        <script type="text/x-handlebars" name="tour-menu-listing">
+        <script type="text/x-handlebars" name="tour-listing">
             <a href="#" data-tour-id="{{id}}" class="menu-listing">
+                <div class="title">{{name}}</div>
+                <div class="info">{{lat}}, {{lon}}</div>
+            </a>
+        </script>
+
+        <script type="text/x-handlebars" name="stop-listing">
+            <a href="#" data-stop-id="{{id}}" class="menu-listing">
                 <div class="title">{{name}}</div>
                 <div class="info">{{lat}}, {{lon}}</div>
             </a>
