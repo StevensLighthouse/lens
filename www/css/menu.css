@@ -25,8 +25,14 @@
 }
 
 .menu-listing {
+  text-decoration: none;
+  display: block;
   padding: 20px;
   border-bottom: 1px solid #ccc;
+}
+
+.menu-listing:active {
+  background-color: #aaa;
 }
 
 .title {
