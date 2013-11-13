@@ -25,16 +25,17 @@
         </script>
 
         <script type="text/x-handlebars" name="tour-menu-listing">
-            <div class="menu-listing">
+            <a href="#" data-tour-id="{{id}}" class="menu-listing">
                 <div class="title">{{name}}</div>
                 <div class="info">{{lat}}, {{lon}}</div>
-            </div>
+            </a>
         </script>
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/include/handlebars.js"></script>
+        <script type="text/javascript" src="js/include/jquery.min.js"></script>
         <script type="text/javascript"
             src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
 
