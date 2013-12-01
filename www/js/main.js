@@ -1,3 +1,10 @@
+/**
+ * Our main script that contains everything to be refactored.
+ */
+
+// the UI history (state)
+var history;
+
 function showLocalTours() {
   navigator.geolocation.getCurrentPosition(function(data) {
     var latitude = data.coords.latitude;
@@ -44,7 +51,7 @@ function buildMenu(items) {
   var menuElement = document.querySelector('script[name="listing-menu"]');
   var menuTemplate = Handlebars.compile(menuElement.innerHTML);
 
-  document.querySelector('#yield').innerHTML = menuTemplate({ items: items });
+  history.push(menuTemplate({ items: items }));
 }
 
 function buildTourMenu(tours) {
@@ -76,6 +83,9 @@ function buildStopMenu(stops) {
 $(function () {
   app.initialize();
   initialize();
+
+  // Establish a state for our application
+  history = new State();
 
   $('#yield').on('click', '.menu-listing', function (e) {
     e.preventDefault();
