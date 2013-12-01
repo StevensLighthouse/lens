@@ -20,6 +20,12 @@ State.VIEW = document.getElementById('yield');
 
 
 /**
+ * Navigation buttons
+ */
+State.BACK_BUTTON = document.querySelector('#navigation .back');
+
+
+/**
  * Pushes a DOM node to the state.
  */
 State.prototype.push = function (elem) {
@@ -34,6 +40,7 @@ State.prototype.push = function (elem) {
  * Reverts the state back n times.
  */
 State.prototype.back = function (distance) {
+  distance = distance || 1;
   var i;
 
   for (i = 0; i < distance; i++) {
@@ -59,4 +66,11 @@ State.prototype.current = function () {
  */
 State.prototype.render = function () {
   State.VIEW.innerHTML = this.current();
+
+  // Determine if we need to show the back button
+  if (this.stack.length > 1) {
+    State.BACK_BUTTON.classList.remove('hidden');
+  } else {
+    State.BACK_BUTTON.classList.add('hidden');
+  }
 };

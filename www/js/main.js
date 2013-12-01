@@ -2,8 +2,8 @@
  * Our main script that contains everything to be refactored.
  */
 
-// the UI history (state)
-var history;
+// the UI history (global state)
+history = null;
 
 function showLocalTours() {
   navigator.geolocation.getCurrentPosition(function(data) {

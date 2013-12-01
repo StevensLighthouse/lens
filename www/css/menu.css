@@ -43,3 +43,22 @@
   color: #444;
   font-style: italic;
 }
+
+#navigation {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.back {
+  padding: 3px;
+  background-color: white;
+  color: #2234ee;
+  font-weight: bold;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.hidden {
+  display: none;
+}
