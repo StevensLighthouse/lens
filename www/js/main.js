@@ -44,7 +44,7 @@ function buildMenu(items) {
   var menuElement = document.querySelector('script[name="listing-menu"]');
   var menuTemplate = Handlebars.compile(menuElement.innerHTML);
 
-  document.querySelector('#overlay').innerHTML = menuTemplate({ items: items });
+  document.querySelector('#yield').innerHTML = menuTemplate({ items: items });
 }
 
 function buildTourMenu(tours) {
@@ -77,7 +77,7 @@ $(function () {
   app.initialize();
   initialize();
 
-  $('#overlay').on('click', '.menu-listing', function (e) {
+  $('#yield').on('click', '.menu-listing', function (e) {
     e.preventDefault();
 
     var id = $(e.target).parents('.menu-listing').data('tour-id');
