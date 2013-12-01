@@ -1,11 +1,4 @@
 var map;
-var markers;
-
-function clearMarkers(markers) {
-  for (var i = 0; i < markers.length; i++ ) {
-    markers[i].setMap(null);
-  }
-}
 
 function initialize() {
   markers = [];
@@ -32,7 +25,5 @@ function initialize() {
       map: map,
       title: 'Hello World!'
     });
-
-    markers.push(marker);
   });
 }

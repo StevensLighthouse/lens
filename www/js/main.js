@@ -3,7 +3,7 @@
  */
 
 // the UI history (global state)
-history = null;
+var history = null;
 
 function showLocalTours() {
   navigator.geolocation.getCurrentPosition(function(data) {
@@ -19,12 +19,10 @@ function showLocalTours() {
     var request = new XMLHttpRequest();
     request.open('GET', 'http://localhost:9393/tours.json?' + qs, true);
     request.onreadystatechange = function() {
-        if (request.readyState == 4) {
-            if (request.status == 200 || request.status == 0) {
-                var data = JSON.parse(request.responseText);
-                buildTourMenu(data.tours);
-            }
-        }
+      if (request.readyState == 4 && (request.status == 200 || request.status == 0)) {
+        var data = JSON.parse(request.responseText);
+        buildTourMenu(data.tours);
+      }
     }
     request.send();
   });
@@ -34,27 +32,28 @@ function getTour(id, callback) {
   var request = new XMLHttpRequest();
   request.open('GET', 'http://localhost:9393/tours/' + id + '.json', true);
   request.onreadystatechange = function() {
-      if (request.readyState == 4) {
-          if (request.status == 200 || request.status == 0) {
-              var data = JSON.parse(request.responseText);
+    if (request.readyState == 4 && (request.status == 200 || request.status == 0)) {
+      var data = JSON.parse(request.responseText);
 
-              if (callback) {
-                callback(data)
-              }
-          }
+      if (callback) {
+        callback(data)
       }
+    }
   }
   return request.send();
 }
 
-function buildMenu(items) {
+function buildMenu(items, markers) {
   var menuElement = document.querySelector('script[name="listing-menu"]');
   var menuTemplate = Handlebars.compile(menuElement.innerHTML);
 
-  history.push(menuTemplate({ items: items }));
+  history.push({
+    view: menuTemplate({ items: items }),
+    markers: markers
+  });
 }
 
-function buildTourMenu(tours) {
+function buildTourMenu(tours, markers) {
   var listingElement = document.querySelector('script[name="tour-listing"]');
   var listingTemplate = Handlebars.compile(listingElement.innerHTML);
 
@@ -64,10 +63,10 @@ function buildTourMenu(tours) {
     items.push(listingTemplate(tours[i]));
   }
 
-  return buildMenu(items);
+  return buildMenu(items, markers);
 }
 
-function buildStopMenu(stops) {
+function buildStopMenu(stops, markers) {
   var listingElement = document.querySelector('script[name="stop-listing"]');
   var listingTemplate = Handlebars.compile(listingElement.innerHTML);
 
@@ -77,7 +76,7 @@ function buildStopMenu(stops) {
     items.push(listingTemplate(stops[i]));
   }
 
-  return buildMenu(items);
+  return buildMenu(items, markers);
 }
 
 $(function () {
@@ -94,10 +93,8 @@ $(function () {
 
     getTour(id, function (data) {
       var stop, stops = [];
-      var marker, markers = [];
+      var markers = [];
       var coords;
-
-      var bounds = new google.maps.LatLngBounds();
 
       for (var i = 0; i < data.tour.stops.length; i++) {
         stop = data.tour.stops[i];
@@ -105,19 +102,14 @@ $(function () {
 
         coords = new google.maps.LatLng(stop.lat, stop.lon);
 
-        bounds.extend(coords);
-
-        marker = new google.maps.Marker({
+        markers.push({
           position: coords,
           map: map,
           title: 'Hello World!'
         });
-
-        markers.push(marker);
       }
 
-      map.fitBounds(bounds);
-      buildStopMenu(stops);
+      buildStopMenu(stops, markers);
     });
   });
 
