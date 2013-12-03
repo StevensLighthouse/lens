@@ -11,11 +11,18 @@
         <title>Lens</title>
     </head>
     <body>
+        <!-- the map is central to our layout, it stays -->
         <div id="map-canvas"></div>
 
-        <!-- overlay! -->
-        <div id="overlay"></div>
+        <!-- overlay -->
+        <div id="yield"></div>
 
+        <!-- navigation -->
+        <div id="navigation">
+            <div class="back hidden">&lt; Back</div>
+        </div>
+
+        <!-- templates -->
         <script type="text/x-handlebars" name="listing-menu">
             <div class="menu bottom">
                 {{#each items}}
@@ -38,6 +45,7 @@
             </a>
         </script>
 
+        <!-- script includes: we should probably use require.js -->
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -45,9 +53,9 @@
         <script type="text/javascript" src="js/include/jquery.min.js"></script>
         <script type="text/javascript"
             src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-
-        <!-- our includes -->
+        <script src="js/state.js"></script>
         <script src="js/map.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/navigation.js"></script>
     </body>
 </html>
