@@ -46,8 +46,8 @@
 
 #navigation {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 20px;
+  left: 6px;
 }
 
 .btn {
@@ -57,7 +57,7 @@
   font-weight: bold;
   border-radius: 3px;
   border: 1px solid #ccc;
-  margin: 5px 0;
+  margin: 0 0 2px 0;
 }
 
 .hidden {
