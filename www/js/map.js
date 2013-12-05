@@ -7,8 +7,8 @@ function initialize() {
     var latitude = data.coords.latitude;
     var longitude = data.coords.longitude;
 
-    latitude = 40.744331;
-    longitude = -74.029003;
+    latitude = 40.724331;
+    longitude = -74.009003;
 
     var coords = new google.maps.LatLng(latitude, longitude);
 

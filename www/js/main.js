@@ -4,6 +4,7 @@
 
 // the UI history (global state)
 var history = null;
+var domain = 'http://localhost:9393';
 
 function showLocalTours() {
   navigator.geolocation.getCurrentPosition(function(data) {
@@ -11,13 +12,13 @@ function showLocalTours() {
     var longitude = data.coords.longitude;
 
     // hard coded
-    latitude = 40.744331;
-    longitude = -74.029003;
+    latitude = 40.724331;
+    longitude = -74.009003;
 
-    var qs = 'lat=' + latitude + '&lon=' + longitude;
+    var qs = 'lat=' + latitude + '&lon=' + longitude + "&distance=.5";
 
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://localhost:9393/tours.json?' + qs, true);
+    request.open('GET', domain + '/tours.json?' + qs, true);
     request.onreadystatechange = function() {
       if (request.readyState == 4 && (request.status == 200 || request.status == 0)) {
         var data = JSON.parse(request.responseText);
@@ -30,7 +31,7 @@ function showLocalTours() {
 
 function getTour(id, callback) {
   var request = new XMLHttpRequest();
-  request.open('GET', 'http://localhost:9393/tours/' + id + '.json', true);
+  request.open('GET', domain + '/tours/' + id + '.json', true);
   request.onreadystatechange = function() {
     if (request.readyState == 4 && (request.status == 200 || request.status == 0)) {
       var data = JSON.parse(request.responseText);
@@ -50,20 +51,52 @@ function buildMenu(items, markers) {
   history.push({
     view: menuTemplate({ items: items }),
     markers: markers
-  });
+  })
+  ;
 }
 
 function buildTourMenu(tours, markers) {
-  var listingElement = document.querySelector('script[name="tour-listing"]');
-  var listingTemplate = Handlebars.compile(listingElement.innerHTML);
+    var directionsService = new google.maps.DirectionsService();
+    var listingElement = document.querySelector('script[name="tour-listing"]');
+    var listingTemplate = Handlebars.compile(listingElement.innerHTML);
+    var items = [], i;
 
-  var items = [], i;
+    // breaks any plans you had of using that return for anything useful. 
+    // Please, think of a better way to do this.
+    navigator.geolocation.getCurrentPosition(function (data) {
+        var latitude = data.coords.latitude;
+        var longitude = data.coords.longitude;
 
-  for (i = 0; i < tours.length; i++) {
-    items.push(listingTemplate(tours[i]));
-  }
+        // hard coded
+        latitude = 40.724331;
+        longitude = -74.009003;
+        
+        for (i = 0; i < tours.length; i++) {
+            var currTour = tours[i];
+            var request = {
+                travelMode: google.maps.TravelMode.WALKING,
+                origin: latitude + "," + longitude,
+                destination: currTour.lat + "," + currTour.lon
+            };
+            
+            currTour.bearing = latitude < currTour.lat ? "North" : "South";
+            currTour.bearing += "-" + (longitude < currTour.lon ? "East" : "West");
 
-  return buildMenu(items, markers);
+            directionsService.route(request, function (result, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    currTour.distance = result.routes[0].legs[0].distance.text;
+                } else{
+                    currTour.distance = "";
+                }
+                
+                items.push(listingTemplate(currTour));
+
+                if (items.length === tours.length) {
+                    buildMenu(items, markers);
+                }
+            });
+        }
+    });
 }
 
 function buildStopMenu(stops, markers) {
