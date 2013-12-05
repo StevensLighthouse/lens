@@ -34,7 +34,7 @@
         <script type="text/x-handlebars" name="tour-listing">
             <a href="#" data-tour-id="{{id}}" class="menu-listing">
                 <div class="title">{{name}}</div>
-                <div class="info">{{description}}</div>
+                <div class="info">{{stops.length}} {{pluralize stops.length 'stop' 'stops'}}</div>
                 <div class="info">{{distance}}, {{bearing}}</div>
             </a>
         </script>
@@ -54,6 +54,7 @@
         <script type="text/javascript" src="js/include/jquery.min.js"></script>
         <script type="text/javascript"
             src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+        <script src="js/helpers.js"></script>
         <script src="js/state.js"></script>
         <script src="js/map.js"></script>
         <script src="js/main.js"></script>

@@ -82,6 +82,9 @@ function buildTourMenu(tours, markers) {
             currTour.bearing = latitude < currTour.lat ? "North" : "South";
             currTour.bearing += "-" + (longitude < currTour.lon ? "East" : "West");
 
+            // We should attach the information we get back towards, well, something -- these give us directions to the first stop
+            // Not entirely sure where we should put it, though. Could attach to the first stop.
+            // But I'm already uncomfortable with just messing around with the objects this way.
             directionsService.route(request, function (result, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
                     currTour.distance = result.routes[0].legs[0].distance.text;
