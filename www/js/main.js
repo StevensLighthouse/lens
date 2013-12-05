@@ -52,8 +52,7 @@ function buildMenu(items, markers, displayState) {
     view: menuTemplate({ items: items }),
     markers: markers,
     displayState: displayState
-  })
-  ;
+  });
 }
 
 function buildTourMenu(tours, markers) {
@@ -145,10 +144,21 @@ $(function () {
           title: 'Hello World!'
         });
       }
+        
+      $('#start-tour').off('click').on('click', function (e) {
+        e.preventDefault();
+
+        history.push({
+          view: null,
+          markers: markers,
+          displayState: "on-tour"
+        });
+      });
 
       buildStopMenu(stops, markers);
     });
   });
+    
 
   showLocalTours();
 });
