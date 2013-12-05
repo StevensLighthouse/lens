@@ -66,7 +66,7 @@ State.prototype.current = function () {
  * Right now, this doesn't do much. In the future we may have transitions.
  */
 State.prototype.render = function () {
-  var bounds, i, marker;
+  var bounds, i, marker, stateElements, activeStates;
   var current = this.current();
 
   // Render view
@@ -91,6 +91,21 @@ State.prototype.render = function () {
 
     map.fitBounds(bounds);
   }
+    
+  // We now look at all elements with state-dependencies, and hide those that are visible during our current state
+  // if there is no state, we hide all elements
+  stateElements = document.querySelectorAll("[data-states]");
+  for (i = 0; i < stateElements.length; i++) {
+      activeStates = stateElements[i].dataset.states.split(" ");
+            
+      if ((current && current.displayState) && activeStates.indexOf(current.displayState) >= 0) {
+          stateElements[i].classList.remove("hidden");
+      } else{
+        stateElements[i].classList.add('hidden');
+      }
+  }
+    
+    // 
 
   // Determine if we need to show the back button
   if (this.stack.length > 1) {

@@ -44,13 +44,14 @@ function getTour(id, callback) {
   return request.send();
 }
 
-function buildMenu(items, markers) {
+function buildMenu(items, markers, displayState) {
   var menuElement = document.querySelector('script[name="listing-menu"]');
   var menuTemplate = Handlebars.compile(menuElement.innerHTML);
 
   history.push({
     view: menuTemplate({ items: items }),
-    markers: markers
+    markers: markers,
+    displayState: displayState
   })
   ;
 }
@@ -95,7 +96,7 @@ function buildTourMenu(tours, markers) {
                 items.push(listingTemplate(currTour));
 
                 if (items.length === tours.length) {
-                    buildMenu(items, markers);
+                    buildMenu(items, markers, "tourlist");
                 }
             });
         }
@@ -112,7 +113,7 @@ function buildStopMenu(stops, markers) {
     items.push(listingTemplate(stops[i]));
   }
 
-  return buildMenu(items, markers);
+  return buildMenu(items, markers, "tour-selected");
 }
 
 $(function () {
