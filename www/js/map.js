@@ -55,15 +55,29 @@ Map.prototype.setPositionMarker = function (callback) {
 };
 
 Map.prototype.zoom = function () {
-  this.map.setCenter(this.currentPosition);
+  var i, bounds;
+
+  if (this.markers.length > 0) {
+    bounds = new google.maps.LatLngBounds();
+    bounds.extend(this.currentPosition);
+
+    for (i = 0; i < this.markers.length; i++) {
+      bounds.extend(this.markers[i].position);
+    }
+
+    this.map.fitBounds(bounds);
+  } else {
+    this.map.setCenter(this.currentPosition);
+  }
 };
 
 Map.prototype.addMarkers = function () {
-  var markers = Array.prototype.slice.call(arguments);
+  var i, marker, markers = Array.prototype.slice.call(arguments);
 
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(this.map);
-    this.markers.push(markers[i]);
+  for (i = 0; i < markers.length; i++) {
+    marker = new google.maps.Marker(markers[i]);
+    marker.setMap(this.map);
+    this.markers.push(marker);
   }
 };
 

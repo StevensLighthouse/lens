@@ -80,16 +80,8 @@ State.prototype.render = function () {
 
   // Render markers
   if (current && current.markers) {
-    bounds = new google.maps.LatLngBounds();
-
-    for (i = 0; i < current.markers.length; i++) {
-      marker = current.markers[i];
-
-      bounds.extend(marker.position);
-      this.map.addMarkers(new google.maps.Marker(marker));
-    }
-
-    map.fitBounds(bounds);
+    this.map.addMarkers.apply(this.map, current.markers);
+    this.map.zoom();
   }
 
   // Determine if we need to show the back button
