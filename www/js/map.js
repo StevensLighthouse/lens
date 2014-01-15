@@ -13,7 +13,7 @@ function initialize() {
     var coords = new google.maps.LatLng(latitude, longitude);
 
     var mapOptions = {
-      zoom: 8,
+      zoom: 12,
       center: coords,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -23,7 +23,15 @@ function initialize() {
     var marker = new google.maps.Marker({
       position: coords,
       map: map,
-      title: 'Hello World!'
+      title: 'Hello World!',
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 7,
+        fillOpacity: 1.0,
+        fillColor: '#66b5ff',
+        strokeColor: '#3695cf',
+        strokeWeight: 1
+      },
     });
   });
 }
