@@ -57,3 +57,20 @@ Map.prototype.setPositionMarker = function (callback) {
 Map.prototype.zoom = function () {
   this.map.setCenter(this.currentPosition);
 };
+
+Map.prototype.addMarkers = function () {
+  var markers = Array.prototype.slice.call(arguments);
+
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(this.map);
+    this.markers.push(markers[i]);
+  }
+};
+
+Map.prototype.clearMarkers = function () {
+  for (var i = 0; i < this.markers.length; i++) {
+    this.markers[i].setMap(null);
+  }
+
+  this.markers = [];
+};

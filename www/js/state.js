@@ -6,11 +6,14 @@
  *
  * The elements in our stack will be objects representing a DOM element to
  * render in our `yield` container, and a list of markers to place on the map.
+ *
+ * This state also stores a Map instance to control its markers
  */
 
-function State() {
+function State(map) {
   this.stack = [];
   this.liveMarkers = [];
+  this.map = map;
 }
 
 
@@ -73,10 +76,7 @@ State.prototype.render = function () {
   State.VIEW.innerHTML = current.view;
 
   // Clear out our existing live markers
-  for (i = 0; i < this.liveMarkers.length; i++) {
-    this.liveMarkers[i].setMap(null);
-  }
-  this.liveMarkers = [];
+  this.map.clearMarkers();
 
   // Render markers
   if (current && current.markers) {
@@ -86,7 +86,7 @@ State.prototype.render = function () {
       marker = current.markers[i];
 
       bounds.extend(marker.position);
-      this.liveMarkers.push(new google.maps.Marker(marker));
+      this.map.addMarkers(new google.maps.Marker(marker));
     }
 
     map.fitBounds(bounds);

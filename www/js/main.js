@@ -89,8 +89,8 @@ $(function () {
   //initialize();
 
   // Establish a state for our application
-  history = new State();
   map = new Map(document.getElementById('map-canvas'));
+  history = new State(map);
 
   $('#yield').on('click', '.menu-listing', function (e) {
     e.preventDefault();
@@ -109,9 +109,7 @@ $(function () {
         coords = new google.maps.LatLng(stop.lat, stop.lon);
 
         markers.push({
-          position: coords,
-          map: map,
-          title: 'Hello World!'
+          position: coords
         });
       }
 
