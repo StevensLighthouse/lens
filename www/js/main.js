@@ -3,7 +3,8 @@
  */
 
 // the UI history (global state)
-var history = null;
+var history;
+var map;
 
 function showLocalTours() {
   navigator.geolocation.getCurrentPosition(function(data) {
@@ -44,7 +45,10 @@ function getTour(id, callback) {
 }
 
 function buildMenu(items, markers) {
-  document.getElementById('map-canvas').classList.add('squish');
+  map.containerEl.classList.add('squish');
+  google.maps.event.trigger(map.map, 'resize');
+  map.zoom();
+
   var menuElement = document.querySelector('script[name="listing-menu"]');
   var menuTemplate = Handlebars.compile(menuElement.innerHTML);
 
@@ -82,10 +86,11 @@ function buildStopMenu(stops, markers) {
 
 $(function () {
   app.initialize();
-  initialize();
+  //initialize();
 
   // Establish a state for our application
   history = new State();
+  map = new Map(document.getElementById('map-canvas'));
 
   $('#yield').on('click', '.menu-listing', function (e) {
     e.preventDefault();
