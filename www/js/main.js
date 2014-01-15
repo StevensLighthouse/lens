@@ -44,6 +44,7 @@ function getTour(id, callback) {
 }
 
 function buildMenu(items, markers) {
+  document.getElementById('map-canvas').classList.add('squish');
   var menuElement = document.querySelector('script[name="listing-menu"]');
   var menuTemplate = Handlebars.compile(menuElement.innerHTML);
 
