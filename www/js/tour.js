@@ -23,7 +23,8 @@ Tour.prototype.start = function () {
   this.state.push({
     view: '',
     navigationText: 'End Tour',
-    cloneMarkers: true
+    cloneMarkers: true,             // clone markers from tour view
+    onPop: this.end.bind(this)      // end tour when the state pops
   });
 };
 
@@ -43,5 +44,5 @@ Tour.prototype.end = function () {
   this.stopIndex = 0;
 
   // change nav
-  this.state.back(1);
+  Tour.CONTROL_VIEW.classList.add('hidden');
 };

@@ -49,10 +49,11 @@ State.prototype.push = function (elem) {
  */
 State.prototype.back = function (distance) {
   distance = distance || 1;
-  var i;
+  var i, elem;
 
   for (i = 0; i < distance; i++) {
-    this.stack.pop();
+    elem = this.stack.pop();
+    if (elem.onPop) elem.onPop();   // invoke the callback if it exists
   }
 
   return this.render();
