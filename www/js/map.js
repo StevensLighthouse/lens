@@ -48,6 +48,7 @@ Map.prototype.setPositionMarker = function (callback) {
         strokeColor: '#3695cf',
         strokeWeight: 1
       },
+      zIndex: 9999
     });
 
     callback.call(this);
