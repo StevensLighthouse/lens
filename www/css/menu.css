@@ -74,6 +74,14 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
+.control {
+  padding: 5px;
+  float: left;
+  width: 40px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .hidden {
   display: none;
 }
