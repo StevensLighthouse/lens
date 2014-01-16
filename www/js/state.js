@@ -75,6 +75,20 @@ State.prototype.render = function () {
   // Render view
   State.VIEW.innerHTML = current.view;
 
+  // Set navigation button text
+  State.BACK_BUTTON.innerHTML = current.navigationText || "< Back";
+
+  // Determine whether or not we need to squish the map
+  if (current.squish) {
+    if (!this.map.containerEl.classList.contains('squish')) {
+      this.map.containerEl.classList.add('squish');
+      google.maps.event.trigger(this.map.map, 'resize');
+      this.map.zoom();
+    }
+  } else {
+    this.map.containerEl.classList.remove('squish');
+  }
+
   // Clear out our existing live markers
   this.map.clearMarkers();
 

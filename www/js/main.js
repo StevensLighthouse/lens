@@ -46,16 +46,13 @@ function getTour(id, callback) {
 }
 
 function buildMenu(items, markers) {
-  map.containerEl.classList.add('squish');
-  google.maps.event.trigger(map.map, 'resize');
-  map.zoom();
-
   var menuElement = document.querySelector('script[name="listing-menu"]');
   var menuTemplate = Handlebars.compile(menuElement.innerHTML);
 
   history.push({
     view: menuTemplate({ items: items }),
-    markers: markers
+    markers: markers,
+    squish: true
   });
 }
 
@@ -160,7 +157,7 @@ $(function () {
   $('#yield').on('click', '.start-tour', function (e) {
     e.preventDefault();
 
-    tour = new Tour(map, stops);
+    tour = new Tour(map, history, stops);
     tour.start();
   });
 

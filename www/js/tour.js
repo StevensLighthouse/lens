@@ -1,8 +1,9 @@
 /**
  * Tour class
  */
-function Tour(map, stops) {
+function Tour(map, state, stops) {
   this.map = map;
+  this.state = state;
   this.stops = stops;
 
   this.stopIndex = 0;
@@ -19,6 +20,7 @@ Tour.prototype.start = function () {
 
   this.isRunning = true;
   Tour.CONTROL_VIEW.classList.remove('hidden');
+  this.state.push({ view: '', navigationText: 'End Tour' });
 };
 
 Tour.prototype.visit = function () {
@@ -37,4 +39,5 @@ Tour.prototype.end = function () {
   this.stopIndex = 0;
 
   // change nav
+  this.state.back(1);
 };
