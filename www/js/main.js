@@ -109,7 +109,15 @@ $(function () {
         coords = new google.maps.LatLng(stop.lat, stop.lon);
 
         markers.push({
-          position: coords
+          position: coords,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 7,
+            fillOpacity: 1.0,
+            fillColor: '#b25c53',
+            strokeColor: '#922c23',
+            strokeWeight: 1
+          },
         });
       }
 
