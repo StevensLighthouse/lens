@@ -5,6 +5,7 @@
 // the UI history (global state)
 var history;
 var map;
+var tour;
 
 function showLocalTours() {
   navigator.geolocation.getCurrentPosition(function(data) {
@@ -75,7 +76,13 @@ function buildStopMenu(stops, markers) {
   var listingElement = document.querySelector('script[name="stop-listing"]');
   var listingTemplate = Handlebars.compile(listingElement.innerHTML);
 
+  var startElement = document.querySelector('script[name="start-tour"]');
+  var startTemplate = Handlebars.compile(startElement.innerHTML);
+
   var items = [], i;
+
+  // Push control to start tour
+  items.push(startTemplate());
 
   for (i = 0; i < stops.length; i++) {
     items.push(listingTemplate(stops[i]));
@@ -97,6 +104,8 @@ function buildStopInfo(stop) {
 }
 
 $(function () {
+  var stops;
+
   app.initialize();
   //initialize();
 
@@ -110,9 +119,11 @@ $(function () {
     var id = $(e.target).parents('.tour-listing').data('tour-id');
 
     getTour(id, function (data) {
-      var stop, stops = [];
+      var stop;
       var markers = [];
       var coords;
+
+      stops = [];
 
       for (var i = 0; i < data.tour.stops.length; i++) {
         stop = data.tour.stops[i];
@@ -144,6 +155,13 @@ $(function () {
     var description = $(this).find('.description').text();
 
     buildStopInfo({ name: name, description: description });
+  });
+
+  $('#yield').on('click', '.start-tour', function (e) {
+    e.preventDefault();
+
+    tour = new Tour(map, stops);
+    tour.start();
   });
 
   showLocalTours();

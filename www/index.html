@@ -22,6 +22,10 @@
             <div class="back hidden">&lt; Back</div>
         </div>
 
+        <div id="controls" class="hidden">
+            <center>Hello, world!</center>
+        </div>
+
         <!-- templates -->
         <script type="text/x-handlebars" name="listing-menu">
             <div class="menu bottom">
@@ -41,6 +45,12 @@
             <a href="#" data-tour-id="{{id}}" class="menu-listing tour-listing">
                 <div class="title">{{name}}</div>
                 <div class="info">{{lat}}, {{lon}}</div>
+            </a>
+        </script>
+
+        <script type="text/x-handlebars" name="start-tour">
+            <a href="#" class="menu-listing start-tour">
+                <div class="title">Start Tour</div>
             </a>
         </script>
 
@@ -69,6 +79,7 @@
             src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
         <script src="js/state.js"></script>
         <script src="js/map.js"></script>
+        <script src="js/tour.js"></script>
         <script src="js/main.js"></script>
         <script src="js/navigation.js"></script>
     </body>

@@ -61,6 +61,19 @@
   border: 1px solid #ccc;
 }
 
+#controls {
+  position: absolute;
+  background-color: #f6f6f6;
+
+  height: 40px;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+
+  border: 1px solid #ccc;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
 .hidden {
   display: none;
 }
