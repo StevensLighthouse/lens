@@ -31,18 +31,32 @@
             </div>
         </script>
 
+        <script type="text/x-handlebars" name="modal">
+            <div class="menu modal">
+                {{{content}}}
+            </div>
+        </script>
+
         <script type="text/x-handlebars" name="tour-listing">
-            <a href="#" data-tour-id="{{id}}" class="menu-listing">
+            <a href="#" data-tour-id="{{id}}" class="menu-listing tour-listing">
                 <div class="title">{{name}}</div>
                 <div class="info">{{lat}}, {{lon}}</div>
             </a>
         </script>
 
         <script type="text/x-handlebars" name="stop-listing">
-            <a href="#" data-stop-id="{{id}}" class="menu-listing">
+            <a href="#" data-stop-id="{{id}}" class="menu-listing stop-listing">
                 <div class="title">{{name}}</div>
                 <div class="info">{{lat}}, {{lon}}</div>
+                <div class="hidden data">
+                    <div class="description">{{description}}</div>
+                </div>
             </a>
+        </script>
+
+        <script type="text/x-handlebars" name="stop-info">
+            <h1 class="stop-name">{{name}}</h1>
+            <p class="stop-description">{{description}}</p>
         </script>
 
         <!-- script includes: we should probably use require.js -->

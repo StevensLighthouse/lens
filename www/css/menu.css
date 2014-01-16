@@ -9,12 +9,14 @@
 }
 
 .modal {
-  top: 20px;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
 
-  border-radius: 10px;
+  border-radius: 5px;
+
+  padding: 30px 10px;
 }
 
 .bottom {

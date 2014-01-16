@@ -84,6 +84,18 @@ function buildStopMenu(stops, markers) {
   return buildMenu(items, markers);
 }
 
+function buildStopInfo(stop) {
+  var modalElement = document.querySelector('script[name="modal"]');
+  var modalTemplate = Handlebars.compile(modalElement.innerHTML);
+
+  var infoElement = document.querySelector('script[name="stop-info"]');
+  var infoTemplate = Handlebars.compile(infoElement.innerHTML);
+
+  history.push({
+    view: modalTemplate({ content: infoTemplate(stop) })
+  });
+}
+
 $(function () {
   app.initialize();
   //initialize();
@@ -92,10 +104,10 @@ $(function () {
   map = new Map(document.getElementById('map-canvas'));
   history = new State(map);
 
-  $('#yield').on('click', '.menu-listing', function (e) {
+  $('#yield').on('click', '.tour-listing', function (e) {
     e.preventDefault();
 
-    var id = $(e.target).parents('.menu-listing').data('tour-id');
+    var id = $(e.target).parents('.tour-listing').data('tour-id');
 
     getTour(id, function (data) {
       var stop, stops = [];
@@ -123,6 +135,15 @@ $(function () {
 
       buildStopMenu(stops, markers);
     });
+  });
+
+  $('#yield').on('click', '.stop-listing', function (e) {
+    e.preventDefault();
+
+    var name = $(this).find('.title').text();
+    var description = $(this).find('.description').text();
+
+    buildStopInfo({ name: name, description: description });
   });
 
   showLocalTours();
