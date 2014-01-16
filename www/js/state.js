@@ -35,6 +35,10 @@ State.BACK_BUTTON = document.querySelector('#navigation .back');
 State.prototype.push = function (elem) {
   if (!elem) return;
 
+  if (elem.cloneMarkers) {
+    elem.markers = this.current().markers;
+  }
+
   this.stack.push(elem);
   return this.render();
 };

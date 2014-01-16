@@ -20,7 +20,11 @@ Tour.prototype.start = function () {
 
   this.isRunning = true;
   Tour.CONTROL_VIEW.classList.remove('hidden');
-  this.state.push({ view: '', navigationText: 'End Tour' });
+  this.state.push({
+    view: '',
+    navigationText: 'End Tour',
+    cloneMarkers: true
+  });
 };
 
 Tour.prototype.visit = function () {
