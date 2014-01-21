@@ -33,6 +33,10 @@ Tour.prototype.start = function () {
 Tour.prototype.visit = function () {
   this.stopIndex++;
 
+  if (this.stopIndex === this.stops.length) {
+    return this.end();
+  }
+
   this.nextStop(this.stops[this.stopIndex].name);
   // See if last stop has been hit
 
