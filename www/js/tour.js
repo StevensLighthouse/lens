@@ -20,16 +20,20 @@ Tour.prototype.start = function () {
 
   this.isRunning = true;
   Tour.CONTROL_VIEW.classList.remove('hidden');
+  this.nextStop(this.stops[this.stopIndex].name);
+
   this.state.push({
     view: '',
-    navigationText: 'End Tour',
-    cloneMarkers: true,             // clone markers from tour view
-    onPop: this.end.bind(this)      // end tour when the state pops
+    hideNavigation: true,
+    //navigationText: 'End Tour',
+    cloneMarkers: true             // clone markers from tour view
   });
 };
 
 Tour.prototype.visit = function () {
   this.stopIndex++;
+
+  this.nextStop(this.stops[this.stopIndex].name);
   // See if last stop has been hit
 
   // highlight next route
@@ -43,6 +47,11 @@ Tour.prototype.end = function () {
   this.isRunning = false;
   this.stopIndex = 0;
 
+  this.state.back(1);
   // change nav
   Tour.CONTROL_VIEW.classList.add('hidden');
+};
+
+Tour.prototype.nextStop = function (stopText) {
+  Tour.CONTROL_VIEW.querySelector('.next-stop').innerHTML = 'Next stop: ' + stopText;
 };

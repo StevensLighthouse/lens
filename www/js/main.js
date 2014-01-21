@@ -161,5 +161,15 @@ $(function () {
     tour.start();
   });
 
+  $('#controls .visit').on('click', function (e) {
+    e.preventDefault();
+    tour.visit();
+  });
+
+  $('#controls .end').on('click', function (e) {
+    e.preventDefault();
+    tour.end();
+  });
+
   showLocalTours();
 });

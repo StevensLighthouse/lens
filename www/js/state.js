@@ -104,7 +104,7 @@ State.prototype.render = function () {
   }
 
   // Determine if we need to show the back button
-  if (this.stack.length > 1) {
+  if (this.stack.length > 1 && !current.hideNavigation) {
     State.BACK_BUTTON.classList.remove('hidden');
   } else {
     State.BACK_BUTTON.classList.add('hidden');
