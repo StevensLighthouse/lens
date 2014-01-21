@@ -15,6 +15,9 @@ function Tour(map, state, stops) {
  */
 Tour.CONTROL_VIEW = document.getElementById('controls');
 
+/**
+ * Function to start the tour
+ */
 Tour.prototype.start = function () {
   // change button to end tour
 
@@ -30,6 +33,9 @@ Tour.prototype.start = function () {
   });
 };
 
+/**
+ * Visits the current stop
+ */
 Tour.prototype.visit = function () {
   this.stopIndex++;
 
@@ -42,10 +48,16 @@ Tour.prototype.visit = function () {
   // highlight next route
 };
 
+/**
+ * Returns the current stop
+ */
 Tour.prototype.currentStop = function () {
   return this.stops[this.stopIndex];
 };
 
+/**
+ * Ends the tour
+ */
 Tour.prototype.end = function () {
   this.isRunning = false;
   this.stopIndex = 0;
@@ -55,6 +67,9 @@ Tour.prototype.end = function () {
   Tour.CONTROL_VIEW.classList.add('hidden');
 };
 
+/**
+ * Sets the next pertaining to the next stop in the control panel
+ */
 Tour.prototype.nextStop = function (stopText) {
   Tour.CONTROL_VIEW.querySelector('.next-stop').innerHTML = 'Next stop: ' + stopText;
 };
