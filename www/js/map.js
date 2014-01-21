@@ -16,6 +16,9 @@ function Map(containerEl) {
   this.setPositionMarker(this.zoom);
 };
 
+/**
+ * Initializes the Google Maps object and sets a resize event listener
+ */
 Map.prototype.initializeMap = function () {
   var mapOptions = {
     zoom: 12,
@@ -26,6 +29,9 @@ Map.prototype.initializeMap = function () {
   google.maps.event.addListener(this.map, 'resize', this.zoom.bind(this));
 };
 
+/**
+ * Sets the current position marker on the map object
+ */
 Map.prototype.setPositionMarker = function (callback) {
   navigator.geolocation.getCurrentPosition(function(data) {
     var latitude = data.coords.latitude;
@@ -55,6 +61,13 @@ Map.prototype.setPositionMarker = function (callback) {
   }.bind(this));
 };
 
+/**
+ * Calculates the zoom of the map
+ *
+ * If there are no markers, this will zoom in on the current position
+ * Otherwise, it will create a bounding rectangle around all markers and the
+ * current position.
+ */
 Map.prototype.zoom = function () {
   var i, bounds;
 
@@ -72,6 +85,9 @@ Map.prototype.zoom = function () {
   }
 };
 
+/**
+ * Adds one or more markers to the map object.
+ */
 Map.prototype.addMarkers = function () {
   var i, marker, markers = Array.prototype.slice.call(arguments);
 
@@ -82,8 +98,12 @@ Map.prototype.addMarkers = function () {
   }
 };
 
+/**
+ * Clears all markers currently stored on the map
+ */
 Map.prototype.clearMarkers = function () {
   for (var i = 0; i < this.markers.length; i++) {
+    // Set each marker's respective map to null
     this.markers[i].setMap(null);
   }
 

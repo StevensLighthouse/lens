@@ -38,7 +38,6 @@ Tour.prototype.visit = function () {
   }
 
   this.nextStop(this.stops[this.stopIndex].name);
-  // See if last stop has been hit
 
   // highlight next route
 };
