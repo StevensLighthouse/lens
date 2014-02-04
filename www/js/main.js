@@ -19,7 +19,7 @@ function showLocalTours() {
     var qs = 'lat=' + latitude + '&lon=' + longitude;
 
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://localhost:9393/api/tours.json?' + qs, true);
+    request.open('GET', 'http://54.226.14.244/api/tours.json?' + qs, true);
     request.onreadystatechange = function() {
       if (request.readyState == 4 && (request.status == 200 || request.status == 0)) {
         var data = JSON.parse(request.responseText);
@@ -32,7 +32,7 @@ function showLocalTours() {
 
 function getTour(id, callback) {
   var request = new XMLHttpRequest();
-  request.open('GET', 'http://localhost:9393/api/tours/' + id + '.json', true);
+  request.open('GET', 'http://54.226.14.244/api/tours/' + id + '.json', true);
   request.onreadystatechange = function() {
     if (request.readyState == 4 && (request.status == 200 || request.status == 0)) {
       var data = JSON.parse(request.responseText);
