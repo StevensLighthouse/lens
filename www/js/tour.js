@@ -23,7 +23,7 @@ Tour.prototype.start = function () {
 
   this.isRunning = true;
   Tour.CONTROL_VIEW.classList.remove('hidden');
-  this.nextStop(this.stops[this.stopIndex].name);
+  this.showDirectionInfo();
 
   this.state.push({
     view: '',
@@ -43,9 +43,7 @@ Tour.prototype.visit = function () {
     return this.end();
   }
 
-  this.nextStop(this.stops[this.stopIndex].name);
-
-  // highlight next route
+  this.showDirectionInfo();
 };
 
 /**
@@ -70,6 +68,19 @@ Tour.prototype.end = function () {
 /**
  * Sets the next pertaining to the next stop in the control panel
  */
-Tour.prototype.nextStop = function (stopText) {
-  Tour.CONTROL_VIEW.querySelector('.next-stop').innerHTML = 'Next stop: ' + stopText;
+Tour.prototype.showDirectionInfo = function (stopText) {
+  var origin = this.map.currentPosition;
+  var nextStop = this.stops[this.stopIndex];
+  var destination = new google.maps.LatLng(nextStop.lat, nextStop.lon);
+  var directions = new Directions(origin, destination);
+
+  directions.fetch(function (result) {
+    var resultText = result.distance + ' ' + result.heading + ' ' + ' on ' + result.street;
+
+    if (result.towards) {
+      resultText += ' towards ' + result.towards;
+    }
+
+    Tour.CONTROL_VIEW.querySelector('.next-stop').innerHTML = resultText;
+  });
 };

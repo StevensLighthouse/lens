@@ -20,8 +20,8 @@ function Directions(origin, destination) {
  */
 Directions.prototype.fetch = function (callback) {
   var options = {
-    origin: new google.maps.LatLng(this.origin.lat, this.origin.lon),
-    destination: new google.maps.LatLng(this.destination.lat, this.destination.lon),
+    origin: this.origin,
+    destination: this.destination,
     travelMode: google.maps.TravelMode.WALKING
   };
 
@@ -39,7 +39,7 @@ Directions.prototype.fetch = function (callback) {
         duration: step.duration.text,
         heading: instructionsMatch[0].slice(3, -4),
         street: instructionsMatch[1].slice(3, -4),
-        towards: instructionsMatch[2].slice(3, -4)
+        towards: instructionsMatch[2] && instructionsMatch[2].slice(3, -4)
       });
     }
   });
