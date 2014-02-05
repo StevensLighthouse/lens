@@ -1,0 +1,27 @@
+<html>
+<head>
+  <title>Map Test</title>
+</head>
+<body>
+
+  <pre id="output"></pre>
+
+  <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+  <script type="text/javascript" src="../js/include/jquery.min.js"></script>
+  <script src="../js/directions.js"></script>
+  <script>
+    var d = new Directions({
+      lat: 40.744331,
+      lon: -74.029003
+    }, {
+      lat: 40.743599,
+      lon: -74.028865
+    });
+
+    d.fetch(function (data) {
+      $("#output").html(JSON.stringify(data, null, 2));
+    })
+  </script>
+</body>
+</html>
