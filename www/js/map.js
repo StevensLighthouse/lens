@@ -22,7 +22,10 @@ function Map(containerEl) {
 Map.prototype.initializeMap = function () {
   var mapOptions = {
     zoom: 12,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    mapTypeControl: false,      // No map type control
+    streetViewControl: false,   // No street view
+    zoomControl: false          // No zoom controls
   };
 
   this.map = new google.maps.Map(this.containerEl, mapOptions);
