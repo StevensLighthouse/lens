@@ -96,8 +96,19 @@ function buildStopInfo(stop) {
   var infoTemplate = Handlebars.compile(infoElement.innerHTML);
 
   history.push({
-    view: modalTemplate({ content: infoTemplate(stop) })
+    view: modalTemplate({
+      content: infoTemplate(stop),
+      images: [
+        'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Hoboken3.jpg/800px-Hoboken3.jpg',
+        'http://upload.wikimedia.org/wikipedia/commons/e/e2/Pier_A_Park_lawn_%26_gazebo_Hoboken_NJ.jpg',
+        'http://media-cdn.tripadvisor.com/media/photo-s/01/49/cc/1f/hoboken.jpg',
+        'http://www.ciaobellagelato.com/blog/wp-content/uploads/2010/07/2354326-Washington_Street-Hoboken.jpg'
+      ]
+    })
   });
+
+  /* Maybe an onPop? */
+  window.mySwipe = Swipe(document.querySelector('.gallery'));
 }
 
 $(function () {
