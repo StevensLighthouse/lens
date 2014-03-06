@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/menu.css" />
+        <link rel="stylesheet" type="text/css" href="css/tour.css" />
 
         <title>Lens</title>
     </head>
@@ -54,6 +55,30 @@
                             </div>
                         {{/images}}
                     </div>
+                </div>
+            </div>
+        </script>
+
+        <!-- link to stops panel -->
+        <script type="text/x-handlebars" name="tour-info">
+            <div class="tour-info menu bottom">
+                <div class="tour-description">
+                    <h1>{{tour.name}}</h1>
+                    <p>{{{tour.description}}}</p>
+                </div>
+
+                <div class="tour-stops-link">
+                    <div class="right arrow">
+                        &gt;
+                    </div>
+
+                    <div class="stops-count">
+                        {{tour.stops.length}} stops
+                    </div>
+                </div>
+
+                <div class="extra-info">
+                    0.6mi
                 </div>
             </div>
         </script>

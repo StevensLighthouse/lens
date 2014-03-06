@@ -1,0 +1,27 @@
+.tour-info {
+  font-size: 14px;
+}
+
+.tour-description {
+  padding: 15px;
+  height: 130px;
+  overflow-y: scroll;
+  border-bottom: 1px solid #222;
+}
+
+.tour-description h1 {
+  text-align: left;
+}
+
+.tour-stops-link {
+  padding: 15px;
+  border-bottom: 1px solid #222;
+}
+
+.tour-stops-link .arrow {
+  font-weight: bold;
+}
+
+.extra-info {
+  padding: 15px;
+}

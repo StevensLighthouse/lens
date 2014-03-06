@@ -21,5 +21,9 @@ html, body {
 }
 
 #map-canvas.squish {
-  bottom: 40%;
+  bottom: 50%;
+}
+
+.right {
+  float: right;
 }

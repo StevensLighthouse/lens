@@ -69,6 +69,17 @@ function buildTourMenu(tours, markers) {
   return buildMenu(items, markers);
 }
 
+function buildTourInfo(tour, markers) {
+  var infoElement = document.querySelector('script[name="tour-info"]');
+  var infoTemplate = Handlebars.compile(infoElement.innerHTML);
+
+  history.push({
+    view: infoTemplate({ tour: tour }),
+    markers: markers,
+    squish: true
+  });
+}
+
 function buildStopMenu(stops, markers) {
   var listingElement = document.querySelector('script[name="stop-listing"]');
   var listingTemplate = Handlebars.compile(listingElement.innerHTML);
@@ -152,7 +163,7 @@ $(function () {
         });
       }
 
-      buildStopMenu(stops, markers);
+      buildTourInfo(data.tour, markers);
     });
   });
 
