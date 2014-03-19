@@ -73,10 +73,19 @@ function buildTourInfo(tour, markers) {
   var infoElement = document.querySelector('script[name="tour-info"]');
   var infoTemplate = Handlebars.compile(infoElement.innerHTML);
 
+  /**
+   * When we draw the tour info page, we also draw the "Start Tour" button.
+   * When this state pops, we should remove the button.
+   */
+  document.querySelector('.start-tour').classList.remove('hidden');
+
   history.push({
     view: infoTemplate({ tour: tour }),
     markers: markers,
-    squish: true
+    squish: true,
+    onPop: function () {
+      document.querySelector('.start-tour').classList.add('hidden');
+    }
   });
 }
 
@@ -135,6 +144,9 @@ $(function () {
       var stop;
       var markers = [];
       var coords;
+
+      /* Expose the current tour's stops globally */
+      stops = data.tour.stops;
 
       for (var i = 0; i < data.tour.stops.length; i++) {
         stop = data.tour.stops[i];
@@ -197,7 +209,8 @@ $(function () {
     buildStopInfo({ name: name, description: description });
   });
 
-  $('#yield').on('click', '.start-tour', function (e) {
+  /* .start-tour will always be present */
+  $('.start-tour').on('click', function (e) {
     e.preventDefault();
 
     tour = new Tour(map, history, stops);

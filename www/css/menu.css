@@ -61,10 +61,18 @@
   background-color: #fff;
 }
 
-.back {
+.nav-button {
   font-size: 16px;
   padding: 5px;
   color: #2234ee;
+}
+
+.back {
+  float: left;
+}
+
+.start-tour {
+  float: right;
 }
 
 #controls {
