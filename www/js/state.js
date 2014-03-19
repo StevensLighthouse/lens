@@ -24,9 +24,10 @@ State.VIEW = document.getElementById('yield');
 
 
 /**
- * Navigation buttons
+ * Navigation & buttons
  */
-State.BACK_BUTTON = document.querySelector('#navigation .back');
+State.NAVIGATION = document.getElementById('navigation');
+State.BACK_BUTTON = State.NAVIGATION.querySelector('.back');
 
 
 /**
@@ -105,8 +106,8 @@ State.prototype.render = function () {
 
   // Determine if we need to show the back button
   if (this.stack.length > 1 && !current.hideNavigation) {
-    State.BACK_BUTTON.classList.remove('hidden');
+    State.NAVIGATION.classList.remove('hidden');
   } else {
-    State.BACK_BUTTON.classList.add('hidden');
+    State.NAVIGATION.classList.add('hidden');
   }
 };
