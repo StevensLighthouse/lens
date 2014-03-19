@@ -84,13 +84,7 @@ function buildStopMenu(stops, markers) {
   var listingElement = document.querySelector('script[name="stop-listing"]');
   var listingTemplate = Handlebars.compile(listingElement.innerHTML);
 
-  var startElement = document.querySelector('script[name="start-tour"]');
-  var startTemplate = Handlebars.compile(startElement.innerHTML);
-
   var items = [], i;
-
-  // Push control to start tour
-  items.push(startTemplate());
 
   for (i = 0; i < stops.length; i++) {
     items.push(listingTemplate(stops[i]));
@@ -142,11 +136,8 @@ $(function () {
       var markers = [];
       var coords;
 
-      stops = [];
-
       for (var i = 0; i < data.tour.stops.length; i++) {
         stop = data.tour.stops[i];
-        stops.push(stop);
 
         coords = new google.maps.LatLng(stop.lat, stop.lon);
 
@@ -164,6 +155,36 @@ $(function () {
       }
 
       buildTourInfo(data.tour, markers);
+    });
+  });
+
+  $('#yield').on('click', '.tour-stops-link', function (e) {
+    e.preventDefault();
+
+    var id = $(this).data('tour-id');
+    getTour(id, function (data) {
+      var markers = [];
+      var coords;
+
+      for (var i = 0; i < data.tour.stops.length; i++) {
+        stop = data.tour.stops[i];
+
+        coords = new google.maps.LatLng(stop.lat, stop.lon);
+
+        markers.push({
+          position: coords,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 7,
+            fillOpacity: 1.0,
+            fillColor: '#b25c53',
+            strokeColor: '#922c23',
+            strokeWeight: 1
+          },
+        });
+      }
+
+      buildStopMenu(data.tour.stops, markers);
     });
   });
 

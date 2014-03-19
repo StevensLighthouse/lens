@@ -67,7 +67,7 @@
                     <p>{{{tour.description}}}</p>
                 </div>
 
-                <div class="tour-stops-link">
+                <div class="tour-stops-link" data-tour-id="{{tour.id}}">
                     <div class="right arrow">
                         &gt;
                     </div>
@@ -87,12 +87,6 @@
             <a href="#" data-tour-id="{{id}}" class="menu-listing tour-listing">
                 <div class="title">{{name}}</div>
                 <div class="info">{{lat}}, {{lon}}</div>
-            </a>
-        </script>
-
-        <script type="text/x-handlebars" name="start-tour">
-            <a href="#" class="menu-listing start-tour">
-                <div class="title">Start Tour</div>
             </a>
         </script>
 
