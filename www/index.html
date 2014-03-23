@@ -27,6 +27,13 @@
         </div>
 
         <div id="controls" class="hidden">
+            <div class="nearby hidden">
+                <!--
+                You are near your first stop: <b>Giovanni's Pizzeria and Restaurant</b>
+                <br><br>
+                <a href="#">Visit</a> <href="#">Info</a>
+                -->
+            </div>
             <div class="next-stop">
                 Next stop:
             </div>
@@ -87,7 +94,7 @@
         <script type="text/x-handlebars" name="tour-listing">
             <a href="#" data-tour-id="{{id}}" class="menu-listing tour-listing">
                 <div class="title">{{name}}</div>
-                <div class="info">{{lat}}, {{lon}}</div>
+                <div class="info">{{stops.length}} stops ⋅ 0.6mi</div>
             </a>
         </script>
 

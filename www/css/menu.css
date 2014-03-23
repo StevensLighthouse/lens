@@ -75,17 +75,20 @@
   float: right;
 }
 
+/* This should be a menu */
 #controls {
   position: absolute;
-  background-color: #f6f6f6;
+  background-color: #fff;
 
-  height: 40px;
-  bottom: 5px;
-  left: 5px;
-  right: 5px;
+  height: 100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
-  border: 1px solid #ccc;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+.nearby {
+  padding: 10px;
+  border-bottom: 1px solid #222;
 }
 
 .control {
@@ -97,6 +100,7 @@
 }
 
 .next-stop {
+  padding: 5px;
   font-style: italic;
 }
 
