@@ -118,7 +118,8 @@ function buildStopInfo(stop) {
         'http://media-cdn.tripadvisor.com/media/photo-s/01/49/cc/1f/hoboken.jpg',
         'http://www.ciaobellagelato.com/blog/wp-content/uploads/2010/07/2354326-Washington_Street-Hoboken.jpg'
       ]
-    })
+    }),
+    cloneMarkers: true
   });
 
   /* Maybe an onPop? */
