@@ -40,8 +40,9 @@ Map.prototype.setPositionMarker = function (callback) {
     var latitude = data.coords.latitude;
     var longitude = data.coords.longitude;
 
-    latitude = 40.744331;
-    longitude = -74.029003;
+    /* babbio */
+    latitude = 40.742989;
+    longitude = -74.026732;
 
     this.currentPosition = new google.maps.LatLng(latitude, longitude);
 
@@ -67,14 +68,21 @@ Map.prototype.setPositionMarker = function (callback) {
 /**
  * Calculates the zoom of the map
  *
- * If there are no markers, this will zoom in on the current position
- * Otherwise, it will create a bounding rectangle around all markers and the
- * current position.
+ * This map can be sent an optional list of coordinates to zoom in on. If
+ * this list is not present, we then check `this.markers`. If that is also
+ * not present, we simply zoom in on the current position.
  */
-Map.prototype.zoom = function () {
+Map.prototype.zoom = function (points) {
   var i, bounds;
+  if (points && points.length > 0) {
+    bounds = new google.maps.LatLngBounds();
 
-  if (this.markers.length > 0) {
+    for (i = 0; i < points.length; i++) {
+      bounds.extend(points[i]);
+    }
+
+    this.map.fitBounds(bounds);
+  } else if (this.markers.length > 0) {
     bounds = new google.maps.LatLngBounds();
     bounds.extend(this.currentPosition);
 

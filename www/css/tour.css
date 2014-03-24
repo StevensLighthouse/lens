@@ -4,7 +4,7 @@
 
 .tour-description {
   padding: 15px;
-  height: 130px;
+  height: 90px;
   overflow-y: scroll;
   border-bottom: 1px solid #222;
 }

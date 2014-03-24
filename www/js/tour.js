@@ -23,7 +23,6 @@ Tour.prototype.start = function () {
 
   this.isRunning = true;
   Tour.CONTROL_VIEW.classList.remove('hidden');
-  this.showDirectionInfo();
 
   this.state.push({
     view: '',
@@ -31,6 +30,9 @@ Tour.prototype.start = function () {
     //navigationText: 'End Tour',
     cloneMarkers: true             // clone markers from tour view
   });
+
+  this.showDirectionInfo();
+  this.rezoom();
 };
 
 /**
@@ -44,6 +46,7 @@ Tour.prototype.visit = function () {
   }
 
   this.showDirectionInfo();
+  this.rezoom();
 };
 
 /**
@@ -83,4 +86,18 @@ Tour.prototype.showDirectionInfo = function (stopText) {
 
     Tour.CONTROL_VIEW.querySelector('.next-stop').innerHTML = resultText;
   });
+};
+
+/**
+ * Zooms the map in on the current position and our next stop
+ */
+Tour.prototype.rezoom = function () {
+  var stop = this.currentStop();
+  this.map.zoom([
+    this.map.currentPosition,
+    new google.maps.LatLng(parseFloat(stop.lat), parseFloat(stop.lon))
+  ]);
+
+  /* hacky - but zoom out just a little */
+  this.map.map.setZoom(this.map.map.getZoom() - 1);
 };

@@ -20,6 +20,10 @@ html, body {
   background: #ffaaaa;
 }
 
+#map-canvas.with-nav {
+  top: 50px;
+}
+
 #map-canvas.squish {
   bottom: 50%;
 }

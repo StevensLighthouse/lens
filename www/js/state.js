@@ -21,6 +21,7 @@ function State(map) {
  * Output node in which to render the state.
  */
 State.VIEW = document.getElementById('yield');
+State.MAP_VIEW = document.getElementById('map-canvas');
 
 
 /**
@@ -107,7 +108,9 @@ State.prototype.render = function () {
   // Determine if we need to show the back button
   if (this.stack.length > 1 && !current.hideNavigation) {
     State.NAVIGATION.classList.remove('hidden');
+    State.MAP_VIEW.classList.add('with-nav');
   } else {
     State.NAVIGATION.classList.add('hidden');
+    State.MAP_VIEW.classList.remove('with-nav');
   }
 };

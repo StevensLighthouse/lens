@@ -12,11 +12,11 @@ function showLocalTours() {
     var latitude = data.coords.latitude;
     var longitude = data.coords.longitude;
 
-    // hard coded
-    latitude = 40.744331;
-    longitude = -74.029003;
+    /* babbio */
+    latitude = 40.742989;
+    longitude = -74.026732;
 
-    var qs = 'lat=' + latitude + '&lon=' + longitude;
+    var qs = 'lat=' + latitude + '&lon=' + longitude + '&distance=10';
 
     var request = new XMLHttpRequest();
     request.open('GET', 'http://54.226.14.244/api/tours.json?' + qs, true);
@@ -173,6 +173,7 @@ $(function () {
   $('#yield').on('click', '.tour-stops-link', function (e) {
     e.preventDefault();
 
+    // TODO - use cloneMarkers: true
     var id = $(this).data('tour-id');
     getTour(id, function (data) {
       var markers = [];
