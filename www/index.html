@@ -54,12 +54,10 @@
         <script type="text/x-handlebars" name="modal">
             <div class="menu modal">
                 <p>{{{content}}}</p>
-                <p>More description info will appear here as well. This text can be <b>styled</b> and may <i>even</i> contain <a href="http://google.com">links</a>.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at ipsum nibh. Suspendisse non neque at mauris sodales vulputate at et purus. In a quam a mi pharetra dapibus. Nulla et hendrerit libero. Nulla nec ullamcorper nisl, ac molestie justo. In nec orci arcu. Pellentesque vel neque mauris. Aliquam nisl nisi, rhoncus vel condimentum vitae, mollis ut nunc. Cras non metus quis metus tempus pretium non eget risus. Sed eu sapien eros.</p>
                 <div class="gallery swipe">
                     <div class="swipe-wrap">
                         {{#images}}
-                            <div class="gallery-img" style="background-image: url('{{.}}')">
+                            <div class="gallery-img" style="background-image: url('http://54.226.14.244{{.}}')">
                             </div>
                         {{/images}}
                     </div>
@@ -103,6 +101,7 @@
                 <div class="title">{{name}}</div>
                 <div class="info">{{lat}}, {{lon}}</div>
                 <div class="hidden data">
+                    <div class="images">{{images}}</div>
                     <div class="description">{{description}}</div>
                 </div>
             </a>

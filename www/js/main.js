@@ -112,12 +112,7 @@ function buildStopInfo(stop) {
   history.push({
     view: modalTemplate({
       content: infoTemplate(stop),
-      images: [
-        'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Hoboken3.jpg/800px-Hoboken3.jpg',
-        'http://upload.wikimedia.org/wikipedia/commons/e/e2/Pier_A_Park_lawn_%26_gazebo_Hoboken_NJ.jpg',
-        'http://media-cdn.tripadvisor.com/media/photo-s/01/49/cc/1f/hoboken.jpg',
-        'http://www.ciaobellagelato.com/blog/wp-content/uploads/2010/07/2354326-Washington_Street-Hoboken.jpg'
-      ]
+      images: stop.images
     }),
     cloneMarkers: true
   });
@@ -175,13 +170,18 @@ $(function () {
     e.preventDefault();
 
     // TODO - use cloneMarkers: true
-    var id = $(this).data('tour-id');
+    var stop, id = $(this).data('tour-id');
     getTour(id, function (data) {
       var markers = [];
       var coords;
 
       for (var i = 0; i < data.tour.stops.length; i++) {
         stop = data.tour.stops[i];
+
+        /* Temporary storage for image URLs */
+        stop.images = stop.photos.map(function (item) {
+          return item.photo.url;
+        }).join(',');
 
         coords = new google.maps.LatLng(stop.lat, stop.lon);
 
@@ -207,8 +207,13 @@ $(function () {
 
     var name = $(this).find('.title').text();
     var description = $(this).find('.description').text();
+    var images = $(this).find('.images').text();
 
-    buildStopInfo({ name: name, description: description });
+    buildStopInfo({
+      name: name,
+      description: description,
+      images: images.split(',')
+    });
   });
 
   /* .start-tour will always be present */
