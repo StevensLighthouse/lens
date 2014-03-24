@@ -229,6 +229,11 @@ $(function () {
     tour.visit();
   });
 
+  $('#controls .skip').on('click', function (e) {
+    e.preventDefault();
+    tour.visit();
+  });
+
   $('#controls .end').on('click', function (e) {
     e.preventDefault();
     tour.end();
