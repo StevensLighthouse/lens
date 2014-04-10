@@ -8,13 +8,20 @@ var map;
 var tour;
 
 function request(url, callback) {
-  // show animation
-  document.getElementById('loading').classList.remove('hidden');
+  var doneLoading = false;
+
+  // show animation after 500ms if we haven't already loaded
+  setTimeout(function () {
+    if (!doneLoading) {
+      document.getElementById('loading').classList.remove('hidden');
+    }
+  }, 500);
 
   var BASE_URL = 'http://54.226.14.244';
   var request = new XMLHttpRequest();
   request.open('GET', BASE_URL + url, true);
   request.onreadystatechange = function () {
+    doneLoading = true;
     // hide the loading indicator
     document.getElementById('loading').classList.add('hidden');
 
