@@ -7,6 +7,28 @@ var history;
 var map;
 var tour;
 
+function request(url, callback) {
+  // show animation
+  document.getElementById('loading').classList.remove('hidden');
+
+  var BASE_URL = 'http://54.226.14.244';
+  var request = new XMLHttpRequest();
+  request.open('GET', BASE_URL + url, true);
+  request.onreadystatechange = function () {
+    // hide the loading indicator
+    document.getElementById('loading').classList.add('hidden');
+
+    if (request.readyState == 4 && (request.status == 200 || request.status == 0)) {
+      var data = JSON.parse(request.responseText);
+      callback(null, data);
+    } else {
+      callback(request.error);  // what field
+    }
+  };
+
+  request.send();
+}
+
 function showLocalTours() {
   navigator.geolocation.getCurrentPosition(function(data) {
     var latitude = data.coords.latitude;
@@ -18,31 +40,16 @@ function showLocalTours() {
 
     var qs = 'lat=' + latitude + '&lon=' + longitude + '&distance=10';
 
-    var request = new XMLHttpRequest();
-    request.open('GET', 'http://54.226.14.244/api/tours.json?' + qs, true);
-    request.onreadystatechange = function() {
-      if (request.readyState == 4 && (request.status == 200 || request.status == 0)) {
-        var data = JSON.parse(request.responseText);
-        buildTourMenu(data.tours);
-      }
-    }
-    request.send();
+    request('/api/tours.json?' + qs, function (err, data) {
+      buildTourMenu(data.tours);
+    });
   });
 }
 
 function getTour(id, callback) {
-  var request = new XMLHttpRequest();
-  request.open('GET', 'http://54.226.14.244/api/tours/' + id + '.json', true);
-  request.onreadystatechange = function() {
-    if (request.readyState == 4 && (request.status == 200 || request.status == 0)) {
-      var data = JSON.parse(request.responseText);
-
-      if (callback) {
-        callback(data)
-      }
-    }
-  }
-  return request.send();
+  request('/api/tours/' + id + '.json', function (err, data) {
+    callback(data);
+  });
 }
 
 function buildMenu(items, markers) {
